@@ -13,18 +13,22 @@ function App() {
   const cartItems = useSelector((state) => state.cart.itemsList);
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        {isLoggIn ? (
+      {isLoggIn ? (
+        <BrowserRouter>
+          <Header />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/account" Component={Account} />
           </Routes>
-        ) : (
-          <Login />
-        )}
-      </BrowserRouter>
+        </BrowserRouter>
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      )}
     </>
   );
 }

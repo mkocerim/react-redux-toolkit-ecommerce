@@ -1,15 +1,17 @@
 import React from "react";
 import "./login.css";
 import back from "../../assets/images/my-account.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(authActions.login());
+    navigate("/");
   };
   return (
     <>
