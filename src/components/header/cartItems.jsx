@@ -2,8 +2,20 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cartSlice";
 
 const CartItems = ({ id, cover, name, price, quantity, totalPrice }) => {
+  const dispatch = useDispatch();
+
+  const incCartItems = () => {
+    dispatch(cartActions.addToCart({ id, name, price }));
+  };
+
+  const descCartItems = () => {
+    dispatch(cartActions.removeFromCart(id));
+  };
+
   return (
     <>
       <div className="cardList" key={id}>
@@ -20,11 +32,11 @@ const CartItems = ({ id, cover, name, price, quantity, totalPrice }) => {
 
             <div className="price">
               <div className="qty flexCenter">
-                <button className="minus">
+                <button className="minus" onClick={descCartItems}>
                   <AiOutlineMinus />
                 </button>
-                <button className="num">1{quantity}</button>
-                <button className="plus">
+                <button className="num">{quantity}</button>
+                <button className="plus" onClick={incCartItems}>
                   <AiOutlinePlus />
                 </button>
               </div>
